@@ -51,7 +51,11 @@ public class CircleFollowing : MonoBehaviour
 
     private void Update()
     {
-        DrawPath();
+        DrawPath();        
+    }
+
+    private void FixedUpdate()
+    {
         transform.forward = FollowPath();
     }
 
@@ -100,9 +104,7 @@ public class CircleFollowing : MonoBehaviour
         _desiredVelocity = point - transform.position;
         _approachDistance = _desiredVelocity.magnitude;
         _desiredVelocity.Normalize();
-        _desiredVelocity *= _maxVelocity;
 
-        /* Arrive
         if (_approachDistance < _approachRadius)
         {
             _desiredVelocity *= _approachDistance / _approachRadius * _maxVelocity;
@@ -110,7 +112,7 @@ public class CircleFollowing : MonoBehaviour
         else
         {
             _desiredVelocity *= _maxVelocity;
-        }*/
+        }
 
         _steering = _desiredVelocity - _velocity;
         _steering = Vector3.ClampMagnitude(_steering, _maxForce);
